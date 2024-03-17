@@ -48,6 +48,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -55,6 +56,7 @@ import com.example.spotthenatureapp.R
 import com.example.spotthenatureapp.ui.components.DateButton
 import com.example.spotthenatureapp.ui.components.DatePicker
 import com.example.spotthenatureapp.ui.components.DropdownMenu
+import com.example.spotthenatureapp.ui.components.MinorButton
 import com.example.spotthenatureapp.ui.components.MyBottomBar
 import com.example.spotthenatureapp.ui.components.MyTopAppBar
 import com.example.spotthenatureapp.ui.components.dateAndTime
@@ -71,8 +73,6 @@ fun ShowIMage() {
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Home(navController: NavController) {
-    var expanded by remember { mutableStateOf(false) }
-    val observationTypes = listOf("Bird", "Mammal", "Plant", "Insect", "Fungus", "Other")
     var selectedType by remember { mutableStateOf("Select type") }
     val date = dateAndTime()
     var selectedDate by remember { mutableStateOf("") }
@@ -134,7 +134,7 @@ fun Home(navController: NavController) {
 
                         ) {
                         Text(
-                            text = "Welcome to Spot the Nature!",
+                            text = stringResource(R.string.heading),
                             style = MaterialTheme.typography.titleLarge,
                             color = MaterialTheme.colorScheme.primary,
                             textAlign = TextAlign.Center,
@@ -143,7 +143,7 @@ fun Home(navController: NavController) {
                                 .padding(top = 30.dp)
                         )
                         Text(
-                            text = "Start by choosing observation type and the date of the observation.",
+                            text = stringResource(R.string.startBy),
                             style = MaterialTheme.typography.bodySmall,
                             textAlign = TextAlign.Justify,
                             modifier = Modifier
@@ -158,16 +158,13 @@ fun Home(navController: NavController) {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
-                                text = "Type of observation:",
+                                text = stringResource(R.string.typeOfObs),
                                 style = MaterialTheme.typography.bodyMedium,
-                                )
+                            )
                             Spacer(modifier = Modifier.height(10.dp))
                             DropdownMenu(
                                 selectedType = selectedType,
                                 onSelectedTypeChange = { selectedType = it },
-                                observationTypes = observationTypes,
-                                expanded = expanded,
-                                onExpandedChange = { expanded = it }
                             )
                         }
                         Column(
@@ -178,39 +175,20 @@ fun Home(navController: NavController) {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
-                                text = "Use current date and time:",
+                                text = stringResource(R.string.useCurrDate),
                                 style = MaterialTheme.typography.bodyMedium,
                                 )
-                            DateButton(text = date, onClick = {
+                            MinorButton(text = date, onClick = {
                                 selectedDate = date;
                                 Toast.makeText(context, "Date and time: $date", Toast.LENGTH_SHORT).show()
                             })
                             Text(
-                                text = "or select a different date:",
+                                text = stringResource(R.string.orSelectDiff),
                                 style = MaterialTheme.typography.bodyMedium,
                                 )
-                            Button(
-                                shape = MaterialTheme.shapes.medium,
-                                border = BorderStroke(1.dp, color = MaterialTheme.colorScheme.tertiary),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.5f),
-                                    contentColor = Color.Black
-                                ),
-                                modifier = Modifier
-                                    .width(200.dp),
-                                onClick = { showDatePickerDialog = true }
-                            ) {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    ) {
-                                    Text(text = "Pick a date")
-                                    Icon(
-                                        imageVector = Icons.Outlined.DateRange,
-                                        contentDescription = null,
-                                        modifier = Modifier.padding(start = 30.dp)
-                                    )
-                                }
-                            }
+                            DateButton(text = "Pick a date", onClick = {
+                                showDatePickerDialog = true
+                            })
                             if (showDatePickerDialog) {
                                 DatePicker() { date ->
                                     selectedDate = date
@@ -236,7 +214,7 @@ fun Home(navController: NavController) {
                                     navController.navigate("addNew/$selectedType/$selectedDate")
                                 }) {
                                 Text(
-                                    text = "Add New Observation: $selectedType",
+                                        text = stringResource(R.string.addObs, selectedType),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = Color.White
                                 )

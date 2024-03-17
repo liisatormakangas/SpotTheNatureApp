@@ -9,5 +9,4 @@ data class NewObservation(
     var latitude: Double = 0.0,
     var longitude: Double = 0.0,
     var optionalLocation: String = "",
-
 )

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SpotTheNatureApp</string>
+    <string name="heading">Welcome to Spot the Nature!</string>
+    <string name="startBy">Start by choosing observation type and the date of the observation.</string>
+    <string name="typeOfObs">Type of observation:</string>
+    <string name="useCurrDate">Use current date and time:</string>
+    <string name="orSelectDiff">or select a different date:</string>
+    <string name="addObs">Add New Observation: %1$s</string>
+
+
 </resources>

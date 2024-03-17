@@ -23,6 +23,10 @@ interface ObservationDao {
     @Query("SELECT * FROM ObservationEntity ORDER BY id DESC")
     suspend fun getAllObservations(): List<ObservationEntity>
 
+    //Delete an observation
+    @Query("DELETE FROM ObservationEntity WHERE id = :id")
+    suspend fun deleteObservation(id: Int)
+
 }
 
 @Database(entities = [ObservationEntity::class], version = 1)

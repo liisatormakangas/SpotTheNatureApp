@@ -59,6 +59,8 @@ class SpotViewModel(private val observationDao: ObservationDao): ViewModel() {
                 longitude = observation.longitude,
                 optionalLocation = observation.optionalLocation
             )
+            Log.d("Observation", "Obse: ${observation}")
+            Log.d("Observation", "Entity: ${observationEntity}")
             observationDao.insertObservation(observationEntity)
         }
     }
@@ -66,10 +68,15 @@ class SpotViewModel(private val observationDao: ObservationDao): ViewModel() {
         viewModelScope.launch {
             observationDao.getAllObservations()?.let {
                 _observationList.value = it
-
             }
         }
+        Log.d("GetAllObservations", "ObservationList: ${observationList}" )
     }
 
+    fun deleteObservation(observationId: Int) {
+        viewModelScope.launch {
+            observationDao.deleteObservation(observationId)
+        }
+    }
 }
 

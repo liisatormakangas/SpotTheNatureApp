@@ -2,6 +2,7 @@ package com.example.spotthenatureapp.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -33,10 +34,10 @@ import androidx.compose.ui.unit.sp
 fun DropdownMenu(
     selectedType: String,
     onSelectedTypeChange: (String) -> Unit,
-    observationTypes: List<String>,
-    expanded: Boolean,
-    onExpandedChange: (Boolean) -> Unit)
-{
+    ) {
+    val observationTypes = listOf("Bird", "Insect","Mammal", "Plant", "Other")
+    var expanded by remember { mutableStateOf(false) }
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -48,7 +49,7 @@ fun DropdownMenu(
                 .fillMaxWidth(),
             expanded = expanded,
             onExpandedChange = {
-                onExpandedChange(it)
+                expanded = !expanded
             }
         ) {
             TextField(
@@ -71,13 +72,13 @@ fun DropdownMenu(
                     .clip(MaterialTheme.shapes.medium)
                     .background(Color.White),
                 expanded = expanded,
-                onDismissRequest = { onExpandedChange(false) }
+                onDismissRequest = { expanded = false }
             ) {
                 observationTypes.forEach { type ->
                     DropdownMenuItem(
                         text = { Text(type) },
                         onClick = {
-                            onExpandedChange(false)
+                            expanded = false
                             onSelectedTypeChange(type)
                         })
                 }

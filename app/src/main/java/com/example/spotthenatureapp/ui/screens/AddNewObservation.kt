@@ -78,7 +78,6 @@ fun ObservationInput(
 ) {
     val observation by observationsViewModel.newObservation.collectAsState()
     val location by locationViewModel.getLocationLiveData().observeAsState()
-    Log.d("AddNewObservation", "location: ${location} value")
     var locationAdded by rememberSaveable { mutableStateOf(true) }
     val scrollState = rememberScrollState()
 
@@ -89,8 +88,8 @@ fun ObservationInput(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues)
                     .scrollable(state = scrollState, orientation = Orientation.Vertical)
+                    .padding(paddingValues)
             ) {
                 Column(
                     verticalArrangement = Arrangement.Center,
