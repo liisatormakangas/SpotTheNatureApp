@@ -23,60 +23,78 @@ class SpotViewModel(private val observationDao: ObservationDao): ViewModel() {
         viewModelScope.launch {
             _newObservation.value = newObservation
         }
-        Log.d("AppViewModel", "Name: ${_newObservation.value} value")
     }
+
     fun changeNameInput(newName: String) {
         _newObservation.value = _newObservation.value.copy(name = newName)
     }
+
     fun changeScientificNameInput(newScientificName: String) {
         _newObservation.value = _newObservation.value.copy(scientificName = newScientificName)
     }
+
     fun changeDescriptionInput(newDescription: String) {
         _newObservation.value = _newObservation.value.copy(description = newDescription)
     }
+
     fun changeDateInput(newDate: String) {
         _newObservation.value = _newObservation.value.copy(date = newDate)
     }
+
     fun changeLatitudeInput(newLatitude: Double) {
         _newObservation.value = _newObservation.value.copy(latitude = newLatitude)
     }
+
     fun changeLongitudeInput(newLongitude: Double) {
         _newObservation.value = _newObservation.value.copy(longitude = newLongitude)
     }
+
     fun changeOptionalLocationInput(newOptionalLocation: String) {
         _newObservation.value = _newObservation.value.copy(optionalLocation = newOptionalLocation)
     }
 
     fun saveObservation(observation: NewObservation) {
         viewModelScope.launch {
-            val observationEntity = ObservationEntity(
-                type = observation.type,
-                name = observation.name,
-                scientificName = observation.scientificName,
-                description = observation.description,
-                date = observation.date,
-                latitude = observation.latitude,
-                longitude = observation.longitude,
-                optionalLocation = observation.optionalLocation
-            )
-            Log.d("Observation", "Obse: ${observation}")
-            Log.d("Observation", "Entity: ${observationEntity}")
-            observationDao.insertObservation(observationEntity)
+            try {
+                val observationEntity = ObservationEntity(
+                    type = observation.type,
+                    name = observation.name,
+                    scientificName = observation.scientificName,
+                    description = observation.description,
+                    date = observation.date,
+                    latitude = observation.latitude,
+                    longitude = observation.longitude,
+                    optionalLocation = observation.optionalLocation
+                )
+                observationDao.insertObservation(observationEntity)
+            } catch (e: Exception) {
+                Log.d("SaveObservation", "Error: ${e.message}")
+            }
+
         }
     }
+
     fun getAllObservations() {
         viewModelScope.launch {
-            observationDao.getAllObservations()?.let {
-                _observationList.value = it
+            try {
+                observationDao.getAllObservations()?.let {
+                    _observationList.value = it
+                }
+            } catch (e: Exception) {
+                Log.d("GetAllObservations", "Error: ${e.message}")
             }
         }
-        Log.d("GetAllObservations", "ObservationList: ${observationList}" )
     }
 
     fun deleteObservation(observationId: Int) {
         viewModelScope.launch {
-            observationDao.deleteObservation(observationId)
+            try {
+                observationDao.deleteObservation(observationId)
+            } catch (e: Exception) {
+                Log.d("DeleteObservation", "Error: ${e.message}")
+            }
         }
     }
 }
+
 

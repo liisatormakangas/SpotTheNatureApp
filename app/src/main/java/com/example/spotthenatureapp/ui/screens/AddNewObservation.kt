@@ -2,9 +2,7 @@ package com.example.spotthenatureapp.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
@@ -34,17 +32,17 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.spotthenatureapp.R
 import com.example.spotthenatureapp.model.NewObservation
 import com.example.spotthenatureapp.ui.components.MyBottomBar
-import com.example.spotthenatureapp.ui.components.MyTopAppBar
 import com.example.spotthenatureapp.ui.components.SecondTopAppBar
 import com.example.spotthenatureapp.ui.components.ShowLocation
 import com.example.spotthenatureapp.viewmodels.LocationViewModel
 import com.example.spotthenatureapp.viewmodels.SpotViewModel
-import kotlin.math.sin
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -99,7 +97,7 @@ fun ObservationInput(
                         .padding(20.dp)
                 ) {
                     Text(
-                        text = "Enter details of the observation:",
+                        text = stringResource(R.string.enter_details_of_the_observation),
                         style = MaterialTheme.typography.bodyMedium,
                         textAlign = TextAlign.Center
                     )
@@ -109,7 +107,7 @@ fun ObservationInput(
                         onValueChange = {  observationsViewModel.changeNameInput(it) },
                         label = {
                             Text(
-                                text = if (selectedType === "Other") "Observation" else "$selectedType species",
+                                text = if (selectedType === "Other") stringResource(R.string.observation) else "$selectedType species",
                                 style = MaterialTheme.typography.bodySmall
                             )
                         },
@@ -122,7 +120,7 @@ fun ObservationInput(
                             onValueChange = { observationsViewModel.changeScientificNameInput(it) },
                             label = {
                                 Text(
-                                    text = "Scientific Name",
+                                    text = stringResource(R.string.scientific_name),
                                     style = MaterialTheme.typography.bodySmall,
                                 )
                             },
@@ -135,7 +133,7 @@ fun ObservationInput(
                         onValueChange = { observationsViewModel.changeDescriptionInput(it)},
                         label = {
                             Text(
-                                text = "Describe the observation",
+                                text = stringResource(R.string.describe_the_observation),
                                 style = MaterialTheme.typography.bodySmall
                             )
                         },
@@ -151,7 +149,7 @@ fun ObservationInput(
                         .padding(10.dp)
                 ) {
                     Text(
-                        text = "Location:",
+                        text = stringResource(R.string.location),
                         style = MaterialTheme.typography.bodyMedium)
                     Spacer(modifier = Modifier.height(10.dp))
 
@@ -166,7 +164,7 @@ fun ObservationInput(
                         }
                     ) {
                         Text(
-                            text = "Click here if you wish not to use the current location but enter location manually below",
+                            text = stringResource(R.string.click_here_if_you_wish_not_to_use_the_current_location_but_enter_location_manually_below),
                             style = MaterialTheme.typography.bodySmall,
                             textAlign = TextAlign.Center
                         )
@@ -176,7 +174,7 @@ fun ObservationInput(
                         value = observation.optionalLocation,
                         onValueChange = { observationsViewModel.changeOptionalLocationInput(it) },
                         label = { Text(
-                            text = "Location (optional)",
+                            text = stringResource(R.string.location_optional),
                             style = MaterialTheme.typography.bodySmall) },
                         shape = MaterialTheme.shapes.medium,
                         textStyle = MaterialTheme.typography.bodySmall
@@ -192,7 +190,7 @@ fun ObservationInput(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text (
-                            text = "Download image",
+                            text = stringResource(R.string.download_image),
                             style = MaterialTheme.typography.bodyMedium)
                         Icon(
                             modifier = Modifier.padding(16.dp),
@@ -214,12 +212,10 @@ fun ObservationInput(
                         observation.latitude = location?.latitude!!
                         observation.longitude = location?.longitude!!
                         saveObservation(observation)
-                        Log.d("AddNewObservation", "Name: ${observation} New values")
-
                         navController.navigate("confirm/$locationAdded")
                     }) {
                     Text(
-                        text = "Go to Confirm Observation",
+                        text = stringResource(R.string.go_to_confirm_observation),
                         style = MaterialTheme.typography.bodySmall
                     )
                 }

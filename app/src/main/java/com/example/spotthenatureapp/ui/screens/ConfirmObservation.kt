@@ -33,9 +33,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.spotthenatureapp.R
 import com.example.spotthenatureapp.ui.components.DatePicker
 import com.example.spotthenatureapp.ui.components.MyBottomBar
 import com.example.spotthenatureapp.ui.components.SecondTopAppBar
@@ -80,7 +82,7 @@ fun ConfirmObservation(
                     value = observation.name,
                     onValueChange = { observationsViewModel.changeNameInput(it) },
                     label = { Text(
-                        if (observation.type == "Other") "Observation" else observation.type + " species") },
+                        if (observation.type == "Other") stringResource(R.string.observation_confirm) else observation.type + " species") },
                     shape = MaterialTheme.shapes.medium,
                     textStyle = MaterialTheme.typography.bodySmall
                 )
@@ -89,7 +91,7 @@ fun ConfirmObservation(
                         value = observation.scientificName,
                         onValueChange = { observationsViewModel.changeScientificNameInput(it) },
                         label = { Text(
-                            text = "Scientific Name",
+                            text = stringResource(R.string.scientific_name_confirm),
                             style = MaterialTheme.typography.bodySmall
                         ) },
                         shape = MaterialTheme.shapes.medium,
@@ -100,14 +102,14 @@ fun ConfirmObservation(
                     value = observation.description,
                     onValueChange = { observationsViewModel.changeDescriptionInput(it) },
                     label = { Text(
-                        text = "Description",
+                        text = stringResource(R.string.description),
                         style = MaterialTheme.typography.bodySmall
                     ) },
                     shape = MaterialTheme.shapes.medium,
                     textStyle = MaterialTheme.typography.bodySmall
                 )
                 Text(
-                    text = "Date: ${observation.date}",
+                    text = stringResource(R.string.date, observation.date),
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Button(
@@ -124,7 +126,7 @@ fun ConfirmObservation(
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Text(text = "Change Date")
+                        Text(text = stringResource(R.string.change_date))
                         Icon(
                             imageVector = Icons.Outlined.DateRange,
                             contentDescription = null,
@@ -133,7 +135,7 @@ fun ConfirmObservation(
                     }
                 }
                 if (showDatePickerDialog) {
-                    DatePicker() { date ->
+                    DatePicker { date ->
                         observationsViewModel.changeDateInput(date)
                         Toast.makeText(
                             context,
@@ -149,7 +151,7 @@ fun ConfirmObservation(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = "Location:",
+                            text = stringResource(R.string.location_confirm),
                             style = MaterialTheme.typography.bodyMedium
                         )
                         ShowLocation(locationViewModel)
@@ -159,7 +161,7 @@ fun ConfirmObservation(
                         value = observation.optionalLocation,
                         onValueChange = { observationsViewModel.changeOptionalLocationInput(it) },
                         label = { Text(
-                            text = "Optional Location",
+                            text = stringResource(R.string.optional_location),
                             style = MaterialTheme.typography.bodySmall
                         ) },
                         shape = MaterialTheme.shapes.medium,
@@ -179,11 +181,10 @@ fun ConfirmObservation(
                             .padding(10.dp),
                         onClick = {
                             observationsViewModel.saveObservation(observation)
-                            Log.d("ConfirmObservation", "Observation saved: $observation")
-                            navController.navigate("home")
+                            navController.navigate("list")
                         }) {
                         Text(
-                            text = "Save Observation",
+                            text = stringResource(R.string.save_observation),
                             style = MaterialTheme.typography.bodyMedium)
                     }
                 }

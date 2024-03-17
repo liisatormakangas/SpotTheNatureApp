@@ -10,7 +10,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.spotthenatureapp.model.Location
 import com.example.spotthenatureapp.viewmodels.LocationViewModel
 import kotlin.math.abs
 

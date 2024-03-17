@@ -1,6 +1,7 @@
 package com.example.spotthenatureapp.ui.components
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -21,8 +21,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.spotthenatureapp.R
 import com.example.spotthenatureapp.model.ObservationEntity
 import com.example.spotthenatureapp.viewmodels.SpotViewModel
 
@@ -35,16 +38,19 @@ fun ObservationsList(observationsViewModel: SpotViewModel, observations: List<Ob
     }
     when (radioOption) {
         "all observations" -> list = observationListState.value
-        "observation name" -> list = observations.filter { it.name.contains(searchString, ignoreCase = true) }
-        "date" -> list = observations.filter {it.date.contains(searchString, ignoreCase = true)}
+        "list by type" -> list = observations.filter { it.type.contains(searchString, ignoreCase = true) }
+        "list by observation name" -> list = observations.filter { it.name.contains(searchString, ignoreCase = true) }
+        "list by date" -> list = observations.filter {it.date.contains(searchString, ignoreCase = true)}
     }
-    LazyColumn() {
+    LazyColumn {
         items(list.size) { index ->
             val observation = list[index]
             ElevatedCard(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .background(color = Color.White)
+                    .border(width = 0.5.dp, color = Color.DarkGray, shape = MaterialTheme.shapes.medium),
                 shape = MaterialTheme.shapes.medium,
                 elevation = CardDefaults.cardElevation(
                     defaultElevation = 8.dp
@@ -53,34 +59,50 @@ fun ObservationsList(observationsViewModel: SpotViewModel, observations: List<Ob
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column(modifier = Modifier
-                        .padding(8.dp)
+                    Column(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .background(color = Color.White)
+                            .clip(shape = MaterialTheme.shapes.medium)
                     ) {
                         if (radioOption != "type") {
                             Text(
-                                text = "Type: ${observation.type}",
+                                text = stringResource(R.string.type, observation.type),
                                 style = MaterialTheme.typography.bodySmall
                             )
                         }
                         Text(
-                            text = "Observation name: ${observation.name}",
+                            text = stringResource(R.string.observation_name, observation.name),
                             style = MaterialTheme.typography.bodySmall)
                         Text(
-                            text = "Scientific name: ${observation.scientificName}",
+                            text = stringResource(
+                                R.string.scientific_name_obs_listing,
+                                observation.scientificName
+                            ),
                             style = MaterialTheme.typography.bodySmall)
                         Text(
-                            text = "Description: ${observation.description}",
+                            text = stringResource(
+                                R.string.description_obs_listing,
+                                observation.description
+                            ),
                             style = MaterialTheme.typography.bodySmall
                         )
                         Text(
-                            text = "Date: ${observation.date}",
+                            text = stringResource(R.string.date_obs_listring, observation.date),
                             style = MaterialTheme.typography.bodySmall
                         )
                         Text(
-                            text = "Location: ${observation.latitude}, ${observation.longitude}",
+                            text = stringResource(
+                                R.string.location_obs_listing,
+                                observation.latitude,
+                                observation.longitude
+                            ),
                             style = MaterialTheme.typography.bodySmall
                         )
-                        Text(text = "Optional location: ${observation.optionalLocation}",
+                        Text(text = stringResource(
+                            R.string.optional_location_obs_listing,
+                            observation.optionalLocation
+                        ),
                             style = MaterialTheme.typography.bodySmall)
                     }
                     IconButton(

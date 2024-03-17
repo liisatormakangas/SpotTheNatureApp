@@ -1,11 +1,39 @@
 <resources>
     <string name="app_name">SpotTheNatureApp</string>
     <string name="heading">Welcome to Spot the Nature!</string>
-    <string name="startBy">Start by choosing observation type and the date of the observation.</string>
-    <string name="typeOfObs">Type of observation:</string>
-    <string name="useCurrDate">Use current date and time:</string>
-    <string name="orSelectDiff">or select a different date:</string>
-    <string name="addObs">Add New Observation: %1$s</string>
+    <string name="start_by">Start by choosing observation type and the date of the observation.</string>
+    <string name="type_of_observation">Type of observation:</string>
+    <string name="use_current_date_and_time">Use current date and time:</string>
+    <string name="or_select_different">or select a different date:</string>
+    <string name="add_new_observation">Add new observation: %1$s</string>
+    <string name="enter_details_of_the_observation">Enter details of the observation:</string>
+    <string name="observation">Observation</string>
+    <string name="scientific_name">Scientific Name</string>
+    <string name="describe_the_observation">Describe the observation</string>
+    <string name="location">Location:</string>
+    <string name="click_here_if_you_wish_not_to_use_the_current_location_but_enter_location_manually_below">Click here if you wish not to use the current location but enter location manually below</string>
+    <string name="location_optional">Location (optional)</string>
+    <string name="download_image">Download image</string>
+    <string name="go_to_confirm_observation">Go to Confirm Observation</string>
+    <string name="scientific_name_confirm">Scientific Name</string>
+    <string name="observation_confirm">Observation</string>
+    <string name="description">Description</string>
+    <string name="date">Date: %1$s</string>
+    <string name="change_date">Change Date</string>
+    <string name="location_confirm">Location:</string>
+    <string name="optional_location">Optional Location</string>
+    <string name="save_observation">Save Observation</string>
+    <string name="select_the_desired_observations_listing">Select the desired listing:</string>
+    <string name="species_or_observation_name">Species or observation name</string>
+    <string name="get_observations">Get observations</string>
+    <string name="no_observations_yet">No observations yet.</string>
+    <string name="type">Type: %1$s</string>
+    <string name="observation_name">Observation name: %1$s</string>
+    <string name="scientific_name_obs_listing">Scientific name: %1$s</string>
+    <string name="description_obs_listing">Description: %1$s</string>
+    <string name="date_obs_listring">Date: %1$s</string>
+    <string name="location_obs_listing">Location: %1$s, %2$s</string>
+    <string name="optional_location_obs_listing">Optional location: %1$s</string>
 
 
 </resources>

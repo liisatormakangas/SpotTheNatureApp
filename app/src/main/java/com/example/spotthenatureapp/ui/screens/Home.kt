@@ -3,30 +3,24 @@ package com.example.spotthenatureapp.ui.screens
 import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.ExitToApp
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
@@ -143,7 +137,7 @@ fun Home(navController: NavController) {
                                 .padding(top = 30.dp)
                         )
                         Text(
-                            text = stringResource(R.string.startBy),
+                            text = stringResource(R.string.start_by),
                             style = MaterialTheme.typography.bodySmall,
                             textAlign = TextAlign.Justify,
                             modifier = Modifier
@@ -158,7 +152,7 @@ fun Home(navController: NavController) {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
-                                text = stringResource(R.string.typeOfObs),
+                                text = stringResource(R.string.type_of_observation),
                                 style = MaterialTheme.typography.bodyMedium,
                             )
                             Spacer(modifier = Modifier.height(10.dp))
@@ -175,22 +169,22 @@ fun Home(navController: NavController) {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
-                                text = stringResource(R.string.useCurrDate),
+                                text = stringResource(R.string.use_current_date_and_time) ,
                                 style = MaterialTheme.typography.bodyMedium,
                                 )
                             MinorButton(text = date, onClick = {
-                                selectedDate = date;
+                                selectedDate = date
                                 Toast.makeText(context, "Date and time: $date", Toast.LENGTH_SHORT).show()
                             })
                             Text(
-                                text = stringResource(R.string.orSelectDiff),
+                                text = stringResource(R.string.or_select_different),
                                 style = MaterialTheme.typography.bodyMedium,
                                 )
                             DateButton(text = "Pick a date", onClick = {
                                 showDatePickerDialog = true
                             })
                             if (showDatePickerDialog) {
-                                DatePicker() { date ->
+                                DatePicker { date ->
                                     selectedDate = date
                                     Toast.makeText(
                                         context,
@@ -214,7 +208,10 @@ fun Home(navController: NavController) {
                                     navController.navigate("addNew/$selectedType/$selectedDate")
                                 }) {
                                 Text(
-                                        text = stringResource(R.string.addObs, selectedType),
+                                        text = stringResource(
+                                            R.string.add_new_observation,
+                                            selectedType
+                                        ),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = Color.White
                                 )
